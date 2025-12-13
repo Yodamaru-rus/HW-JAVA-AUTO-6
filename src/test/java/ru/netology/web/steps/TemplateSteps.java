@@ -22,6 +22,7 @@ public class TemplateSteps {
     }
 
     @Когда("пользователь пытается авторизоваться с именем {string} и паролем {string}")
+    @Пусть("пользователь залогинен с именем {string} и паролем {string},")
     public void loginWithNameAndPassword(String login, String password) {
         verificationPage = loginPage.Loginning(login, password);
     }
@@ -49,5 +50,17 @@ public class TemplateSteps {
     @Тогда("происходит успешная передача денег")
     public void successfulTransfer() {
         dashboardPage.successTransfer();
+    }
+
+    @Когда("пользователь переводит {string} рублей с карты с номером {string} на свою {int} карту с главной страницы,")
+    public void topUpAccountV2(String summ, String numberAccFrom, int to) {
+        int from = dashboardPage.getAccountID(numberAccFrom);
+        String numberAccTo = dashboardPage.getAccountNumber(to);
+        dashboardPage.topUpAccount(to, from, summ, numberAccTo, numberAccFrom);
+    }
+
+    @Тогда("баланс его {int} карты из списка на главной странице должен стать {int} рублей.")
+    public void endBalanse(int numberCard, int balance) {
+        dashboardPage.successTransfer(numberCard, balance);
     }
 }

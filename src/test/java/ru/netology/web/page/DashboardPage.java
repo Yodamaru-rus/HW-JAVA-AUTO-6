@@ -20,6 +20,21 @@ public class DashboardPage {
         heading.shouldBe(visible);
     }
 
+    public int getAccountID(String numberAccount) {
+        String substr = numberAccount.substring(numberAccount.length() - 4);
+        for (int i = 0; i < accountCashs.toArray().length; i++) {
+            String a = accountCashs.get(i).getText().replaceAll("(?s).*?(\\d{4}).*", "$1");
+            if (a.equals(substr)) {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+
+    public String getAccountNumber(int to) {
+        return accountCashs.get(to).getText().substring(0, 19);
+    }
+
     public void topUpAccount(int to, int from, String summValue, String numberAccTo, String numberAccFrom) {
         this.to = to - 1;
         this.from = from - 1;
@@ -31,10 +46,18 @@ public class DashboardPage {
     }
 
     public void successTransfer() {
+        successTransfer(-1, -1);
+    }
+
+    public void successTransfer(int card, int balance) {
         reloadButton.click();
         int summValueInt = Integer.parseInt(summValue.trim());
-        accountCashs.get(to).shouldHave(text(" баланс: " + (balanceAccountToBefore + summValueInt) + " р."));
-        accountCashs.get(from).shouldHave(text(" баланс: " + (balanceAccountFromBefore - summValueInt) + " р."));
+        if (balance > -1 && card > -1) {
+            accountCashs.get(card - 1).shouldHave(text(" баланс: " + balance + " р."));
+        } else {
+            accountCashs.get(to).shouldHave(text(" баланс: " + (balanceAccountToBefore + summValueInt) + " р."));
+            accountCashs.get(from).shouldHave(text(" баланс: " + (balanceAccountFromBefore - summValueInt) + " р."));
+        }
     }
 
     public void balanceAcc() {
