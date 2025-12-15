@@ -9,7 +9,6 @@ import static com.codeborne.selenide.Selenide.$;
 public class VerificationPage {
     private SelenideElement verifyCode = $("[data-test-id=code] input");
     private SelenideElement nextVerifyButton = $("[data-test-id=action-verify]");
-    private SelenideElement errorPopup = $(".notification__content");
 
     public VerificationPage() {
         verifyCode.shouldBe(visible);
@@ -19,9 +18,5 @@ public class VerificationPage {
         verifyCode.setValue(verifyCodeValue);
         nextVerifyButton.click();
         return new DashboardPage();
-    }
-
-    public void ifCodeIsInvalid() {
-        errorPopup.shouldHave(text("Ошибка! Неверно указан код! Попробуйте ещё раз."));
     }
 }

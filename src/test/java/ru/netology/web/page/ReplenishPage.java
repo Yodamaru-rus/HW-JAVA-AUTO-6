@@ -20,16 +20,9 @@ public class ReplenishPage {
     }
 
     public void relenishAccount(String summValue, String fromValue) {
+        verifyIsReplenishPage();
         summ.setValue(summValue);
         from.setValue(fromValue);
         transferButton.click();
-    }
-
-    public void cancelCashInAccounts() {
-        cancelButton.click();
-    }
-
-
-    public static class relenishAccount {
     }
 }
