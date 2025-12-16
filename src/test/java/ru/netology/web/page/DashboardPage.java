@@ -18,12 +18,11 @@ public class DashboardPage {
         heading.shouldBe(visible);
     }
 
-    public void topUpAccount(int to, String summValue, String numberAccFrom) {
+    public ReplenishPage topUpAccount(int to) {
         to -= 1;
         verifyIsDashboardPage();
         replenishButtons.get(to).click();
-        ReplenishPage replenish = new ReplenishPage();
-        replenish.relenishAccount(summValue, numberAccFrom);
+        return new ReplenishPage();
     }
 
     public void successTransfer(int card, int balance) {

@@ -10,6 +10,7 @@ import lombok.Value;
 // можно вызывать подобные методы непосредственно в шагах сценария (steps)
 public class DataGenerate {
 
+    
     public static VerificationCode getVerificationCode() {
         return new VerificationCode("12345");
     }

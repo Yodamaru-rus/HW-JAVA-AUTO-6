@@ -8,6 +8,7 @@ import io.cucumber.java.ru.Пусть;
 import io.cucumber.java.ru.Тогда;
 import ru.netology.web.page.DashboardPage;
 import ru.netology.web.page.LoginPage;
+import ru.netology.web.page.ReplenishPage;
 import ru.netology.web.page.VerificationPage;
 
 
@@ -33,7 +34,8 @@ public class TemplateSteps {
 
     @Когда("пользователь переводит {string} рублей с карты с номером {string} на свою {int} карту с главной страницы,")
     public void topUpAccountV2(String summ, String numberAccFrom, int to) {
-        dashboardPage.topUpAccount(to, summ, numberAccFrom);
+        ReplenishPage replenishPage = dashboardPage.topUpAccount(to);
+        replenishPage.relenishAccount(summ, numberAccFrom);
     }
 
     @Тогда("баланс его {int} карты из списка на главной странице должен стать {int} рублей.")
